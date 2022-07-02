@@ -1,6 +1,6 @@
 # Getting Started With this demo
 
-## IMPORTANT NOTICE: THIS WILL WORK WITH `CHROME` AND `MACOS SAFARI` ONLY
+#### IMPORTANT NOTICE: THIS WILL WORK WITH `CHROME` AND `MACOS SAFARI` ONLY
 
 ## Dependencies
 
@@ -12,7 +12,7 @@
 1. `npm install`
 2. `npm start`
 
-3. ### Open the browser and navigate to <http://localhost:3000/>
+3. Open the browser and navigate to <http://localhost:3000/>
 
 4. Let the magic happen.
 
