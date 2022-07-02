@@ -34,7 +34,8 @@ const App = () => {
     <div>
       <p>Microphone: {listening ? "on" : "off"}</p>
       <p>
-        <span> *BONUS* </span>Commands: {commands.map((c) => c.command + " ")}
+        <span> *BONUS* </span>Voice Commands:{" "}
+        {commands.map((c) => c.command + " ")}
       </p>
       <button
         onTouchStart={startListeningEn}
