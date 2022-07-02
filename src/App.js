@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
-function App() {
+const App = () => {
+  const commands = [
+    {
+      command: "clear",
+      callback: () => resetTranscript(),
+    },
+  ];
+  const {
+    transcript,
+    listening,
+    browserSupportsSpeechRecognition,
+    resetTranscript,
+  } = useSpeechRecognition({ commands });
+  const startListeningEn = () =>
+    SpeechRecognition.startListening({
+      continuous: true,
+      language: ["en-US"],
+    });
+  const startListeningAr = () =>
+    SpeechRecognition.startListening({
+      continuous: true,
+      language: ["ar-SA"],
+    });
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>Microphone: {listening ? "on" : "off"}</p>
+      <p>
+        <span> *BONUS* </span>Commands: {commands.map((c) => c.command + " ")}
+      </p>
+      <button
+        onTouchStart={startListeningEn}
+        onMouseDown={startListeningEn}
+        onTouchEnd={SpeechRecognition.stopListening}
+        onMouseUp={SpeechRecognition.stopListening}
+      >
+        Hold to talk [English (en-US)]
+      </button>
+      <button
+        onTouchStart={startListeningAr}
+        onMouseDown={startListeningAr}
+        onTouchEnd={SpeechRecognition.stopListening}
+        onMouseUp={SpeechRecognition.stopListening}
+      >
+        Hold to talk [Arabic (ar-SA)]
+      </button>
+
+      <button
+        onClick={() => {
+          resetTranscript();
+        }}
+      >
+        Click to remove transcript
+      </button>
+      <p>{transcript}</p>
     </div>
   );
-}
-
+};
 export default App;
